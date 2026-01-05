@@ -1,21 +1,97 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  /* Custom scrollbar for code blocks */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+@theme {
+  /* Primary Colors */
+  --color-primary: #2b6cee;
+  --color-primary-hover: #1e5dd8;
+
+  /* Background Colors */
+  --color-background-light: #f6f6f8;
+  --color-background-dark: #101622;
+  --color-surface-dark: #1e232e;
+
+  /* Border Colors */
+  --color-border-dark: #282e39;
+
+  /* Text Colors */
+  --color-text-secondary: #9da6b9;
+
+  /* Accent Colors */
+  --color-accent-gold: #ffd700;
+  --color-code-bg: #0d1117;
+
+  /* Fonts */
+  --font-display: var(--font-inter);
+  --font-mono: var(--font-fira-code);
+  --font-handwriting: var(--font-handwriting);
+
+  /* Animations */
+  --animate-blob: gradient-xy 8s ease-in-out infinite;
+}
+
+@keyframes gradient-xy {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
   }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
+
+  50% {
+    transform: translate(10px, -10px) scale(1.1);
+    opacity: 0.3;
   }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #2a2e37;
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #3e4351;
-  }
+}
+
+/* Custom scrollbar for code blocks */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e232e;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #3b4354;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+/* Code Syntax Highlighting */
+.code-keyword {
+  color: #c678dd;
+  /* Purple for keywords */
+}
+
+.code-function {
+  color: #61afef;
+  /* Blue for functions */
+}
+
+.code-string {
+  color: #98c379;
+  /* Green for strings */
+}
+
+.code-comment {
+  color: #5c6370;
+  /* Gray for comments */
+  font-style: italic;
+}
+
+.code-variable,
+.code-accent {
+  color: #e5c07b;
+  /* Gold for variables/accents */
+}
+
+.code-operator {
+  color: #56b6c2;
+  /* Cyan for operators */
 }

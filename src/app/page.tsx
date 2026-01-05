@@ -23,7 +23,7 @@ export default function Home() {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               <a className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors" href="#features">Features</a>
-              <a className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors" href="https://github.com/RkayG/tenet">Docs</a>
+              <a className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors" href="/get-started">Docs</a>
               <a className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors" href="#enterprise">Enterprise</a>
               <a className="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors" href="#blog">Blog</a>
             </div>
@@ -60,9 +60,9 @@ export default function Home() {
                 v1.0 is now available
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white">
-                Build on <br className="hidden lg:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Solid Fundamentals</span>
+              <h1 className="text-4xl font-extrabold tracking-wider font-handwriting sm:text-5xl lg:text-7xl font-black leading-[1.1] text-slate-900 dark:text-white">
+                Enterprise API <br className="hidden lg:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Built Right</span>
               </h1>
 
               <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
@@ -70,10 +70,10 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start mt-4">
-                <button className="h-12 px-6 rounded-lg bg-primary hover:bg-primary-hover text-white text-base font-bold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 min-w-[160px] justify-center">
+                <a href="/get-started" className="h-12 px-6 rounded-lg bg-primary hover:bg-primary-hover text-white text-base font-bold shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 min-w-[160px] justify-center">
                   Get Started
                   <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
-                </button>
+                </a>
 
                 <div className="group relative flex items-center">
                   <div className="h-12 pl-4 pr-12 rounded-lg bg-slate-100 dark:bg-[#1e2330] border border-slate-200 dark:border-[#2a2e37] text-slate-600 dark:text-slate-300 font-mono text-sm flex items-center min-w-[240px]">
@@ -119,32 +119,35 @@ export default function Home() {
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                   </div>
-                  <div className="text-xs font-mono text-slate-500">server.ts</div>
+                  <div className="text-xs font-mono text-slate-500">route.ts</div>
                   <div className="w-12"></div>
                 </div>
 
                 {/* Code Content */}
                 <div className="p-6 overflow-x-auto custom-scrollbar">
-                  <pre className="font-mono text-sm leading-relaxed text-slate-300"><code><span className="text-purple-400">import</span> {`{ createHandler }`} <span className="text-purple-400">from</span> <span className="text-green-400">'@tenet/api'</span>;
-                    <span className="text-purple-400">import</span> {`{ prisma }`} <span className="text-purple-400">from</span> <span className="text-green-400">'./db'</span>;
-
-                    <span className="text-slate-500">// Secure API with audit trails</span>
-                    <span className="text-purple-400">const</span> handler = <span className="text-yellow-300">createHandler</span>({`{`}
-                    schema: z.<span className="text-blue-400">object</span>({`{`}
-                    name: z.<span className="text-blue-400">string</span>(),
-                    {`}`}),
-                    auditConfig: {`{`}
-                    enabled: <span className="text-blue-400">true</span>,
-                    trackDataChanges: <span className="text-blue-400">true</span>,
-                    {`}`},
-                    handler: <span className="text-purple-400">async</span> ({`{ input }`}) =&gt; {`{`}
-                    <span className="text-purple-400">return</span> <span className="text-purple-400">await</span> prisma.project.<span className="text-blue-400">create</span>({`{`}
-                    data: input
-                    {`}`});
-                    {`}`}
-                    {`}`});
-
-                    console.<span className="text-blue-400">log</span>(<span className="text-green-400">'Tenet server ready 🚀'</span>);</code></pre>
+                  <pre className="font-mono text-sm leading-relaxed text-slate-300"><code><span className="text-purple-400">import</span> {`{ createTenantHandler }`} <span className="text-purple-400">from</span> <span className="text-green-400">'@tenet/api'</span>;{'\n'}
+                    <span className="text-purple-400">import</span> {`{ z }`} <span className="text-purple-400">from</span> <span className="text-green-400">'zod'</span>;{'\n'}
+                    {'\n'}
+                    <span className="text-purple-400">export</span> <span className="text-purple-400">const</span> handler = <span className="text-yellow-300">createTenantHandler</span>({`{`}{'\n'}
+                    {'  '}schema: z.<span className="text-blue-400">object</span>({`{`}{'\n'}
+                    {'    '}name: z.<span className="text-blue-400">string</span>(),{'\n'}
+                    {'    '}description: z.<span className="text-blue-400">string</span>().<span className="text-blue-400">optional</span>(),{'\n'}
+                    {'  '}{`}`}),{'\n'}
+                    {'  '}allowedRoles: [<span className="text-green-400">'OWNER'</span>, <span className="text-green-400">'MANAGER'</span>],{'\n'}
+                    {'  '}requireOwnership: {`{`}{'\n'}
+                    {'    '}table: <span className="text-green-400">'project'</span>,{'\n'}
+                    {'    '}resourceIdParam: <span className="text-green-400">'id'</span>,{'\n'}
+                    {'  '}{`}`},{'\n'}
+                    {'  '}auditConfig: {`{`}{'\n'}
+                    {'    '}trackDataChanges: <span className="text-blue-400">true</span>,{'\n'}
+                    {'    '}retentionCategory: <span className="text-green-400">'compliance'</span>,{'\n'}
+                    {'  '}{`}`},{'\n'}
+                    {'  '}handler: <span className="text-purple-400">async</span> ({`{ input, tenantId, prisma }`}) =&gt; {`{`}{'\n'}
+                    {'    '}<span className="text-purple-400">return</span> <span className="text-purple-400">await</span> prisma.project.<span className="text-blue-400">create</span>({`{`}{'\n'}
+                    {'      '}data: {`{ ...input, tenantId }`}{'\n'}
+                    {'    '}{`}`});{'\n'}
+                    {'  '}{`}`}{'\n'}
+                    {`}`});</code></pre>
                 </div>
 
                 {/* Status Bar */}
